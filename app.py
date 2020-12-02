@@ -13,7 +13,7 @@ def generate(url, filename):
     r = requests.post(link, json=param)
     data = json.loads(r.text) 
 
-    st.write("frequency counts are being sent to second function.... it takes a minute for te first time..")
+    st.write("frequency counts are being sent to second function.... it takes a minute for the first time..")
     
     link = 'https://us-central1-faas-297022.cloudfunctions.net/plot_data'
     param = {'data': data, 'filename': filename}
@@ -33,8 +33,8 @@ def main():
         if storage.Blob(bucket=bucket, name=filename[:-3]+"png").exists(storage_client):
             st.write("This is a Cached Image:")
             st.image("https://storage.googleapis.com/faasimages/" + filename[:-3] + "png")
-            if st.button("If you want to run it anyway and see for yourself"):
-                generate(url, filename)
+#             if st.button("If you want to run it anyway and see for yourself"):
+#                 generate(url, filename)
         else:
             generate(url, filename)
 
