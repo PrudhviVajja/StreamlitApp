@@ -35,7 +35,7 @@ def main():
             st.image("https://storage.googleapis.com/faasimages/" + filename[:-3] + "png")
             if st.button("If you want to run it anyway and see for yourself"):
                 generate()
-        except:
+        else:
             generate()
 
 if __name__ == "__main__":
