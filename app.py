@@ -16,6 +16,7 @@ def main():
         r = requests.post(link, json=param)
         data = json.loads(r.text) #r.text.strip('][').split(', ')
         # print(type(data))
+        st.write(frequency counts dictionary of the book.)
         st.write(dict(collections.Counter(data)))
         st.write(url)
         
