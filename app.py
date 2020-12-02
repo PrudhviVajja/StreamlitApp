@@ -2,6 +2,10 @@ import streamlit as st
 import requests
 import collections 
 import json
+from google.cloud import storage
+
+storage_client = storage.Client(project='faas-297022')
+bucket = storage_client.bucket('faasimages')
 
 def generate():
     link = 'https://us-central1-faas-297022.cloudfunctions.net/sent_freq'
@@ -26,7 +30,7 @@ def main():
     filename = url.split('/')[-1] #+ '.abc'
     
     if st.button('Submit url'):
-        try:
+        if storage.Blob(bucket=bucket, name=filename[:-3]+"png").exists(storage_client):
             st.write("This is a Cached Image:")
             st.image("https://storage.googleapis.com/faasimages/" + filename[:-3] + "png")
             if st.button("If you want to run it anyway and see for yourself"):
