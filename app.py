@@ -7,7 +7,7 @@ from google.cloud import storage
 storage_client = storage.Client(project='faas-297022')
 bucket = storage_client.bucket('faasimages')
 
-def generate():
+def generate(url, filename):
     link = 'https://us-central1-faas-297022.cloudfunctions.net/sent_freq'
     param = {'link': url}
     r = requests.post(link, json=param)
@@ -34,9 +34,9 @@ def main():
             st.write("This is a Cached Image:")
             st.image("https://storage.googleapis.com/faasimages/" + filename[:-3] + "png")
             if st.button("If you want to run it anyway and see for yourself"):
-                generate()
+                generate(url, filename)
         else:
-            generate()
+            generate(url, filename)
 
 if __name__ == "__main__":
     main()
