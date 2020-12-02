@@ -3,6 +3,7 @@ import requests
 import collections 
 import json
 from google.cloud import storage
+import time
 
 storage_client = storage.Client(project='faas-297022')
 bucket = storage_client.bucket('faasimages')
@@ -39,4 +40,7 @@ def main():
             generate(url, filename)
 
 if __name__ == "__main__":
+    start = time.time()
     main()
+    end = time.time()
+    st.write("Time taken to calculate output ==> " + str(start-end))
